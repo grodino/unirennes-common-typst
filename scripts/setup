@@ -20,9 +20,8 @@ function read-toml() {
   perl -lne "print \"\$1\" if /^${key}\\s*=\\s*\"(.*)\"/" < "$file"
 }
 
-ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")"; pwd -P)/.." # macOS has no realpath
-PKG_PREFIX="$(read-toml "$ROOT/typst.toml" "name")"
-VERSION="$(read-toml "$ROOT/typst.toml" "version")"
+PKG_PREFIX="$(read-toml "$TYPST_ROOT/typst.toml" "name")"
+VERSION="$(read-toml "$TYPST_ROOT/typst.toml" "version")"
 
 function resolve-target() {
   local target="$1"
