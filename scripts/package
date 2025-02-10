@@ -33,7 +33,7 @@ function enumerate {
 		echo "$root"
 	else
 		local files
-		readarray -t files < <(find "$root" \
+		readarray -t files < <(find -L "$root" \
       -mindepth 1 -maxdepth 1 \
       -not -name .git \
       -not -name .typstignore)
@@ -70,9 +70,11 @@ readarray -t files < <(enumerate ".")
 
 TMP="$(mktemp -d)"
 
+echo "${files[@]}"
+
 for f in "${files[@]}"; do
   mkdir -p "$TMP/$(dirname "$f")" 2>/dev/null
-  cp -r "$TYPST_ROOT/$f" "$TMP/$f"
+  cp -rL "$TYPST_ROOT/$f" "$TMP/$f"
 done
 
 TARGET="${TARGET:?}/${PKG_PREFIX:?}/${VERSION:?}"
