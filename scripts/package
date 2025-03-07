@@ -70,8 +70,6 @@ readarray -t files < <(enumerate ".")
 
 TMP="$(mktemp -d)"
 
-echo "${files[@]}"
-
 for f in "${files[@]}"; do
   mkdir -p "$TMP/$(dirname "$f")" 2>/dev/null
   cp -rL "$TYPST_ROOT/$f" "$TMP/$f"

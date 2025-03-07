@@ -6,3 +6,29 @@
 #let accent-pink = (dark: rgb("#a8004d"), light: rgb("#ed6ea7"))
 #let accent-red = (dark: rgb("#b51f1f"), light: rgb("#e63312"))
 #let accent-orange = (dark: rgb("#cc621a"), light: rgb("#f7a600"))
+
+#let display-palette() = {
+  let colors = (
+    primary: primary,
+    accent-green: accent-green,
+    accent-cyan: accent-cyan,
+    accent-blue: accent-blue,
+    accent-purple: accent-purple,
+    accent-pink: accent-pink,
+    accent-red: accent-red,
+    accent-orange: accent-orange,
+  )
+  grid(
+    columns: 3,
+    align: center + horizon,
+    inset: 1cm,
+    [],
+    grid.vline(stroke: 2pt),
+    [dark],
+    [light],
+    grid.hline(stroke: 2pt),
+    ..for (name, colors) in colors.pairs() {
+      (name, grid.cell(fill: colors.dark)[], grid.cell(fill: colors.light)[])
+    }
+  )
+}
